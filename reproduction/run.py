@@ -6,10 +6,19 @@ import subprocess
 import time
 from pathlib import Path
 
+for variable in (
+    "OPENBLAS_NUM_THREADS",
+    "OMP_NUM_THREADS",
+    "MKL_NUM_THREADS",
+    "VECLIB_MAXIMUM_THREADS",
+):
+    os.environ[variable] = "1"
+
 import numpy as np
 
 from reproduction.historical_checks import run_checks
 from reproduction.claim1_counterexample import run_claim1_counterexample
+from reproduction.preference_pilot import run_preference_pilot
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -104,6 +113,41 @@ def run_claim1(config):
     return checks, certificate
 
 
+def run_empirical_pilot(config):
+    _, claim1 = run_claim1(config)
+    protocol_path = ROOT / "evidence" / "empirical_protocol.json"
+    pilot = run_preference_pilot(protocol_path)
+    pilot_path = write_json("real_preference_pilot.json", pilot)
+    claims = [
+        {"id": "C1", "status": "FALSIFIED", "reason": claim1["reason"]},
+        *[
+            {
+                "id": claim_id,
+                "status": "VERIFIED" if pilot["gates"][claim_id] else "BLOCKED",
+                "reason": (
+                    "The predeclared real-preference policy gate passed."
+                    if pilot["gates"][claim_id]
+                    else "The predeclared real-preference policy gate did not pass."
+                ),
+            }
+            for claim_id in ("C2", "C3", "C4")
+        ],
+        {"id": "C5", "status": "BLOCKED", "reason": "Not tested on this route."},
+        {"id": "C6", "status": "BLOCKED", "reason": "No benchmark reproduction."},
+    ]
+    claims_path = write_json("claim_statuses.json", claims)
+    metadata_path = OUTPUTS / "run_metadata.json"
+    claim1_path = OUTPUTS / "claim1_counterexample.json"
+    manifest = {
+        path.name: file_sha256(path)
+        for path in (claims_path, metadata_path, claim1_path, pilot_path, protocol_path)
+    }
+    write_json("manifest.json", manifest)
+    passed = sum(pilot["gates"].values())
+    print(f"Real-preference claim gates: {passed}/3 passed")
+    print(f"EVAL empirical_claim_gates={passed}")
+
+
 def main():
     config = json.loads((ROOT / "reproduction" / "config.json").read_text())
     if config["threads"] != 1:
@@ -114,6 +158,9 @@ def main():
         return
     if config["mode"] == "claim1_counterexample":
         run_claim1(config)
+        return
+    if config["mode"] == "real_preference_pilot":
+        run_empirical_pilot(config)
         return
     raise SystemExit(f"Unsupported mode: {config['mode']}")
 
