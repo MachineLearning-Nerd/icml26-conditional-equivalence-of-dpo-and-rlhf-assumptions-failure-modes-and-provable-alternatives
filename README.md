@@ -4,6 +4,7 @@ emoji: 🎯
 colorFrom: yellow
 colorTo: red
 sdk: static
+app_file: index.html
 pinned: false
 tags:
  - trackio
