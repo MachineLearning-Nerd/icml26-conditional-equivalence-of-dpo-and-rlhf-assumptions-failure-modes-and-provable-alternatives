@@ -1,0 +1,8 @@
+{
+  "claim_id": "C4",
+  "claim": "Adding gamma times the preferred/dispreferred log-probability ratio to RLHF yields a first-order relation with an adaptive inverse-probability margin; replacing optimal-policy probabilities by fixed reference probabilities gives a stationary DPO-like loss.",
+  "quantifiers": "Finite positive policy and reference probabilities, beta > 0, gamma >= 0, for the single-pair specialization printed by the paper.",
+  "source": "arXiv:2605.20834 source, main/cpo.tex, def:margin_rlhf through eq:reference_adaptive_margin",
+  "verification_rule": "VERIFIED if direct differentiation reproduces the first-order relation, the adaptive margin, the fixed-reference stationary approximation, and gamma=0 recovers DPO.",
+  "limitations": "This checks the derivation and stationary approximation, not the paper's separate global convergence or absolute-advantage guarantees."
+}

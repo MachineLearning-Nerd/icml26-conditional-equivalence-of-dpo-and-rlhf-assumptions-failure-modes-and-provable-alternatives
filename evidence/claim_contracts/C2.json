@@ -1,0 +1,8 @@
+{
+  "claim_id": "C2",
+  "claim": "When the boundary condition fails, KL-regularized RLHF can have delta_star <= 0 while the stated DPO loss optimizes only the relative log-odds advantage delta - delta_ref.",
+  "quantifiers": "All beta > 0, reward_gap > 0, and finite delta_ref satisfying delta_ref <= -reward_gap/beta.",
+  "source": "arXiv:2605.20834 source, main/implicit_assu.tex:33-52 and theorem thm:conditional_equivalence",
+  "verification_rule": "VERIFIED if exact arithmetic proves the RLHF sign implication, the DPO argument is translation invariant, and its derivative is strictly negative at every finite delta.",
+  "limitations": "This objective eventually pushes an unconstrained scalar delta positive; the result distinguishes objectives and does not claim permanent empirical misalignment."
+}

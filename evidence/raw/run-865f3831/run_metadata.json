@@ -1,0 +1,19 @@
+{
+  "arxiv": "2605.20834",
+  "command": "uv sync --frozen && uv run --frozen python -m reproduction.run",
+  "config": {
+    "mode": "claim1_counterexample",
+    "seed": 260520834,
+    "threads": 1
+  },
+  "cpu_count_visible": 8,
+  "git_sha": "6517ea849291a30a963b4bc17393ef10b10c873e",
+  "judged_space_revision": "73b1ac8ff5dd201847e1e11cccc0ee0514beb728",
+  "numpy": "2.3.2",
+  "openresearch_run_id": "865f3831-7ad1-48b3-8c45-ea94374e2e54",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.11",
+  "runtime_seconds": 0.029252625012304634,
+  "seed": 260520834,
+  "threads_used": 1
+}

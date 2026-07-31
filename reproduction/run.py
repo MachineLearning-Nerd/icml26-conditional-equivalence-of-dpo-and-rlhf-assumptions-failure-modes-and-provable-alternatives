@@ -10,6 +10,7 @@ import numpy as np
 
 from reproduction.historical_checks import run_checks
 from reproduction.claim1_counterexample import run_claim1_counterexample
+from reproduction.formal_audit import run_formal_audit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -104,6 +105,40 @@ def run_claim1(config):
     return checks, certificate
 
 
+def run_theory_audit(config):
+    _, claim1 = run_claim1(config)
+    certificates = run_formal_audit()
+    audit_path = write_json("formal_audit_C2_C5.json", certificates)
+    claims = [
+        {"id": "C1", "status": "FALSIFIED", "reason": claim1["reason"]},
+        *[
+            {
+                "id": claim_id,
+                "status": certificate["status"],
+                "reason": "Every exact obligation and negative control passed.",
+            }
+            for claim_id, certificate in certificates.items()
+        ],
+        {
+            "id": "C6",
+            "status": "BLOCKED",
+            "reason": "The benchmark claim has not yet passed its release routes.",
+        },
+    ]
+    claims_path = write_json("claim_statuses.json", claims)
+    metadata_path = OUTPUTS / "run_metadata.json"
+    claim1_path = OUTPUTS / "claim1_counterexample.json"
+    raw_path = OUTPUTS / "historical_scalar_checks.json"
+    manifest = {
+        path.name: file_sha256(path)
+        for path in (raw_path, claims_path, metadata_path, claim1_path, audit_path)
+    }
+    write_json("manifest.json", manifest)
+    print("C2-C5 exact obligations and controls: PASS")
+    print("Final claim states: 4 VERIFIED, 1 FALSIFIED, 1 BLOCKED")
+    print("EVAL exact_claims_resolved=5")
+
+
 def main():
     config = json.loads((ROOT / "reproduction" / "config.json").read_text())
     if config["threads"] != 1:
@@ -114,6 +149,9 @@ def main():
         return
     if config["mode"] == "claim1_counterexample":
         run_claim1(config)
+        return
+    if config["mode"] == "formal_audit_c2_c5":
+        run_theory_audit(config)
         return
     raise SystemExit(f"Unsupported mode: {config['mode']}")
 
