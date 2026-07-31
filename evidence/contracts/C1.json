@@ -1,0 +1,24 @@
+{
+  "claim_id": "C1",
+  "claim": "For every preference datum, DPO and KL-regularized RLHF optimize equivalent objectives if and only if the RLHF-optimal policy prefers the human-preferred response; equivalently, delta_ref > -reward_gap / beta for every pair.",
+  "quantifiers": {
+    "dataset": "all ordered preference triples (x, y_w, y_l) in D",
+    "parameters": "all beta > 0 and reward_gap = r*(y_w) - r*(y_l) > 0"
+  },
+  "assumptions": [
+    "The policy assigns positive probability to both responses so log odds are finite.",
+    "The RLHF optimum obeys delta_star = delta_ref + reward_gap / beta.",
+    "The DPO objective is the ordered-pair loss stated by the paper: -log sigma(beta * (delta - delta_ref))."
+  ],
+  "source": {
+    "arxiv": "2605.20834",
+    "archive_sha256": "cec74f481515079f9124c63b4c88d31528712518358d5c5735025ae044eea841",
+    "files": [
+      "main/implicit_assu.tex:77-85 (thm:conditional_equivalence)",
+      "appendix/proof.tex:37-133 (app:ce)"
+    ],
+    "url": "https://arxiv.org/e-print/2605.20834"
+  },
+  "falsification_rule": "FALSIFIED if one valid finite-policy instance satisfies every premise and the boundary condition while the RLHF optimum is not a DPO optimum.",
+  "limitations": "This contract tests the theorem exactly as written for the ordered-pair DPO loss. It does not test a different population cross-entropy that averages both possible stochastic labels for the same pair."
+}

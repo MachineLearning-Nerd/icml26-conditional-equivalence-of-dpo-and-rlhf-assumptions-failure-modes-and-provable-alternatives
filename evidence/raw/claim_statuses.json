@@ -1,0 +1,32 @@
+[
+  {
+    "id": "C1",
+    "reason": "All theorem premises and its strict boundary hold, but increasing finite log odds from the RLHF optimum 1 to 2 strictly lowers the stated DPO loss.",
+    "status": "FALSIFIED"
+  },
+  {
+    "id": "C2",
+    "reason": "Exact objective checks and the predeclared real-preference gate passed.",
+    "status": "VERIFIED"
+  },
+  {
+    "id": "C3",
+    "reason": "Exact U-region checks and the predeclared real-preference gate passed.",
+    "status": "VERIFIED"
+  },
+  {
+    "id": "C4",
+    "reason": "The exact constrained-RLHF derivation passed; the scaled comparative model gate failed and is retained as a limitation.",
+    "status": "VERIFIED"
+  },
+  {
+    "id": "C5",
+    "reason": "The uniform softplus-to-hinge certificate and controls passed.",
+    "status": "VERIFIED"
+  },
+  {
+    "id": "C6",
+    "reason": "The paper's reported point ranking is transcribed correctly, but no public model/generations permit independent evaluation and the supplied uncertainty is not decisive.",
+    "status": "BLOCKED"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "claim_id": "C5",
+  "claim": "As beta tends to infinity, the DPO loss divided by beta converges to hinge loss max(0, delta_ref-delta), whose threshold delta_ref can be negative.",
+  "quantifiers": "Every fixed finite pair (delta, delta_ref) in R^2 as beta tends to positive infinity.",
+  "source": "arXiv:2605.20834 source, main/rerank.tex, prop:dpo_margin_ranking",
+  "verification_rule": "VERIFIED if the uniform error bound 0 <= softplus(beta*a)/beta-max(0,a) <= log(2)/beta is checked with boundary and sign controls.",
+  "limitations": "This is an asymptotic objective identity; it does not establish downstream model behavior at a particular finite beta."
+}

@@ -1,0 +1,1 @@
+uv sync --frozen && uv run --frozen python -m reproduction.run

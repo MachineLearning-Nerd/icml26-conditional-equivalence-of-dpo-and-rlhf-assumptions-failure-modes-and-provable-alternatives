@@ -1,0 +1,77 @@
+[
+  {
+    "detail": {
+      "boundary": -2.0,
+      "cases": [
+        {
+          "delta_ref": 2.0,
+          "delta_star": 4.0,
+          "equivalent": true
+        },
+        {
+          "delta_ref": 0.0,
+          "delta_star": 2.0,
+          "equivalent": true
+        },
+        {
+          "delta_ref": -1.5,
+          "delta_star": 0.5,
+          "equivalent": true
+        },
+        {
+          "delta_ref": -2.5,
+          "delta_star": -0.5,
+          "equivalent": false
+        },
+        {
+          "delta_ref": -3.0,
+          "delta_star": -1.0,
+          "equivalent": false
+        }
+      ]
+    },
+    "id": "historical-C1",
+    "passed": true
+  },
+  {
+    "detail": {
+      "delta_ref": -3.0,
+      "dpo_final_delta": 2.6891420195395943,
+      "loss_shift_invariant": true,
+      "rlhf_delta_star": -1.0
+    },
+    "id": "historical-C2",
+    "passed": true
+  },
+  {
+    "detail": {
+      "delta_ref": -2.0,
+      "gradient_factors": [
+        0.3775406687981454,
+        0.2689414213699951,
+        0.18242552380635635,
+        0.11920292202211755
+      ]
+    },
+    "id": "historical-C3",
+    "passed": true
+  },
+  {
+    "detail": {
+      "delta_ref": -3.0,
+      "effective_target": 0.0,
+      "final_delta": 5.675452670509168,
+      "margin": 3.0
+    },
+    "id": "historical-C4",
+    "passed": true
+  },
+  {
+    "detail": {
+      "negative_target": -3.0,
+      "positive_target": 0.5
+    },
+    "id": "historical-C5",
+    "passed": true
+  }
+]

@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "title": "7UEBX1KU1y — exact and real-preference reproduction",
+  "emoji": "🔬",
+  "space_id": "DineshAI/7UEBX1KU1y",
+  "paper": null,
+  "tags": [
+    "icml2026-repro",
+    "paper-7UEBX1KU1y"
+  ],
+  "updated_at": "2026-07-31T00:00:00+00:00",
+  "root": {
+    "slug": "index",
+    "title": "7UEBX1KU1y — exact and real-preference reproduction",
+    "file": "pages/index.md",
+    "children": [
+      {
+        "slug": "executive-summary",
+        "title": "Executive summary",
+        "file": "pages/executive-summary/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-1",
+        "title": "Claim 1",
+        "file": "pages/claim-1/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-2",
+        "title": "Claim 2",
+        "file": "pages/claim-2/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-3",
+        "title": "Claim 3",
+        "file": "pages/claim-3/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-4",
+        "title": "Claim 4",
+        "file": "pages/claim-4/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-5",
+        "title": "Claim 5",
+        "file": "pages/claim-5/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-6",
+        "title": "Claim 6",
+        "file": "pages/claim-6/page.md",
+        "children": []
+      },
+      {
+        "slug": "current-conclusion",
+        "title": "Conclusion",
+        "file": "pages/current-conclusion/page.md",
+        "children": []
+      },
+      {
+        "slug": "historical-notice",
+        "title": "Historical rejected baseline — notice",
+        "file": "pages/historical-notice/page.md",
+        "children": []
+      },
+      {
+        "slug": "overview",
+        "title": "Historical rejected baseline — overview",
+        "file": "pages/overview/page.md",
+        "children": []
+      },
+      {
+        "slug": "claims",
+        "title": "Historical rejected baseline — claims",
+        "file": "pages/claims/page.md",
+        "children": []
+      },
+      {
+        "slug": "evidence",
+        "title": "Historical rejected baseline — evidence",
+        "file": "pages/evidence/page.md",
+        "children": []
+      },
+      {
+        "slug": "conclusion",
+        "title": "Historical rejected baseline — conclusion",
+        "file": "pages/conclusion/page.md",
+        "children": []
+      },
+      {
+        "slug": "verification-run",
+        "title": "Historical rejected baseline — verification run",
+        "file": "pages/verification-run/page.md",
+        "children": []
+      }
+    ]
+  },
+  "agent_view_tokens": 6000,
+  "revision": "release-1dbd3ae77db2"
+}

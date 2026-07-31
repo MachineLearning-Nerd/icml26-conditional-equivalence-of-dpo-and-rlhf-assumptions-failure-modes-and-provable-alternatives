@@ -1,0 +1,11 @@
+{
+  "evidence/claim_contracts/C6.json": "e1b04c675b4ad2c575c76327c04f6ee971cbca00c00241ff8a8da232fdd1aa6d",
+  "evidence/empirical_protocol.json": "f63e75a5c1988fb9780788e2553ef0012d8876a23fd9d4a5c634e73dfb8e6355",
+  "outputs/benchmark_audit_C6.json": "62a0b3f8ed4966c019cd789eae102d6d4c386704f2c2a84ddc424f4fcbf8bb31",
+  "outputs/claim1_counterexample.json": "c4a650596bc09ecbeef4b39a1a5117705f5766ad6c8f9c6a4b215bb43332ee2f",
+  "outputs/claim_statuses.json": "0c1e011343ed0ffcbd387921bc1fe952d1147f9305db771871a4bb18cacc9ab1",
+  "outputs/formal_audit_C2_C5.json": "42d4372bb98ca627772eab29ada08eb915231ec02d9d4bcafe04d3bc105f9a08",
+  "outputs/historical_scalar_checks.json": "6f0a519d66b118bc262ee2200c711269bc9843693c80435c01da4801620a2c87",
+  "outputs/real_preference_pilot.json": "5a09adb97f07e410fd843e87f6e92b10c4ddbbed0dfdb4d739000ac12d3dd1d7",
+  "outputs/run_metadata.json": "8f7d6da779aa9c40ba62373d147da9e1b066c66c99d5429d7923a979d55d6ff2"
+}

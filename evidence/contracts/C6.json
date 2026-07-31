@@ -1,0 +1,24 @@
+{
+  "claim_id": "C6",
+  "claim": "The paper's Llama-3-8B-Instruct experiments report new state-of-the-art point estimates among the methods in its table on AlpacaEval 2 and Arena-Hard.",
+  "exact_setup": {
+    "base_model": "Llama-3-8B-Instruct",
+    "preference_dataset": "princeton-nlp/llama3-ultrafeedback-armorm",
+    "benchmarks": ["AlpacaEval 2", "Arena-Hard"],
+    "source": "arXiv:2605.20834 source, main/exp.tex and main_table.tex"
+  },
+  "required_final_evidence": "Independent benchmark reproduction or immutable model generations sufficient to rerun the exact judges.",
+  "routes": [
+    "Audit the author table, rankings, and claimed arithmetic.",
+    "Retrieve author code, checkpoint, generations, and exact training configuration.",
+    "Assess whether the official benchmark pipelines can be run from available artifacts under the no-GPU rule.",
+    "Attempt falsification using reported uncertainty and missing paired outcomes."
+  ],
+  "status_rule": "BLOCKED when the report audit passes but no model/generation artifact permits independent evaluation and the reported uncertainty cannot decisively confirm or refute the leading comparison.",
+  "retrieved_utc_date": "2026-07-31",
+  "external_sources": [
+    "https://github.com/visitworld123/CPO",
+    "https://github.com/tatsu-lab/alpaca_eval",
+    "https://github.com/lmarena/arena-hard-auto"
+  ]
+}

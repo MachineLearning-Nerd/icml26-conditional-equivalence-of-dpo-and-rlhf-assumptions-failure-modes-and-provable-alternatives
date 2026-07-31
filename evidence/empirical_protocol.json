@@ -1,0 +1,24 @@
+{
+  "dataset": "princeton-nlp/llama3-ultrafeedback-armorm",
+  "dataset_revision": "9d189bae5856a823f3708d2c2bc4dbb43c90eb11",
+  "source_url": "https://datasets-server.huggingface.co/rows",
+  "scope": "512 chosen/rejected response pairs at eight fixed offsets; six chunks train and two chunks test",
+  "offsets": [0, 7484, 14968, 22452, 29936, 37420, 44904, 52388],
+  "rows_per_offset": 64,
+  "feature_model": "Deterministic signed-hash unigram/bigram linear text policy, 512 dimensions, 256 response tokens",
+  "seeds": [17, 29, 43],
+  "label_corruption_rates": [0.2, 0.4, 0.6],
+  "beta": 1.0,
+  "gamma": 0.02,
+  "reference_epochs": 80,
+  "policy_epochs": 100,
+  "learning_rate": 0.3,
+  "l2": 0.01,
+  "threads": 1,
+  "release_gates": {
+    "C2": "Every DPO run lowers its stated objective and at least one trained reference is preference-misaligned on held-out real pairs.",
+    "C3": "At least one DPO trajectory enters U while its objective falls.",
+    "C4": "Mean held-out CPO escape rate exceeds DPO by at least 0.02, mean CPO preference accuracy is not lower, and gamma=0 reproduces DPO bit-for-bit."
+  },
+  "limitations": "This is a CPU-scaled learned text policy on the paper dataset, not the paper's Llama-3-8B model or AlpacaEval/Arena-Hard benchmark."
+}

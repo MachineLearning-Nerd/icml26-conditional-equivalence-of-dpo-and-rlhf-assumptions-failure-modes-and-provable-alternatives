@@ -1,0 +1,85 @@
+{
+  "author_report_point_estimates": "VERIFIED",
+  "claim_id": "C6",
+  "independent_benchmark_reproduction": "BLOCKED",
+  "reason": "The paper's reported point ranking is transcribed correctly, but no public model/generations permit independent evaluation and the supplied uncertainty is not decisive.",
+  "routes": [
+    {
+      "name": "author_table_and_arithmetic",
+      "passed": true,
+      "result": "The point estimates and arithmetic match the source table."
+    },
+    {
+      "checks": {
+        "author_repository_available": false,
+        "cpo_checkpoint_available": false,
+        "exact_training_configuration_available": false,
+        "generation_outputs_available": false
+      },
+      "name": "artifact_provenance",
+      "passed": false,
+      "result": "The paper-linked GitHub repository returned repository not found; no immutable model or generations were located."
+    },
+    {
+      "checks": {
+        "alpaca_eval_default_uses_api_judge": true,
+        "alpaca_eval_requires_model_outputs": true,
+        "arena_hard_requires_model_answers": true,
+        "arena_hard_uses_api_judge": true,
+        "gpu_training_authorized": false,
+        "required_cpo_model_or_outputs_available": false
+      },
+      "name": "official_benchmark_execution",
+      "passed": false,
+      "result": "The public benchmark code is executable, but the missing CPO checkpoint/generations cannot be regenerated under the no-GPU rule."
+    },
+    {
+      "checks": {
+        "alpaca_confidence_intervals_reported": false,
+        "cpo_arena_90_ci": [
+          30.700000000000003,
+          35.0
+        ],
+        "leading_arena_intervals_overlap": true,
+        "paired_judgments_available": false,
+        "simpo_arena_90_ci": [
+          27.3,
+          32.3
+        ]
+      },
+      "name": "falsification_with_reported_uncertainty",
+      "passed": false,
+      "result": "CPO and runner-up SimPO Arena-Hard intervals overlap, and no paired judgments or AlpacaEval intervals support a decisive significance test."
+    }
+  ],
+  "status": "BLOCKED",
+  "table": {
+    "CPO": {
+      "alpaca_lc": 26.57,
+      "alpaca_wr": 25.15,
+      "arena_ci": [
+        1.9,
+        2.4
+      ],
+      "arena_wr": 32.6
+    },
+    "DPO": {
+      "alpaca_lc": 25.09,
+      "alpaca_wr": 24.6,
+      "arena_ci": [
+        1.7,
+        1.5
+      ],
+      "arena_wr": 28.9
+    },
+    "SimPO": {
+      "alpaca_lc": 25.91,
+      "alpaca_wr": 23.48,
+      "arena_ci": [
+        2.7,
+        2.3
+      ],
+      "arena_wr": 30.0
+    }
+  }
+}

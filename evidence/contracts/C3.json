@@ -1,0 +1,8 @@
+{
+  "claim_id": "C3",
+  "claim": "The undesirable region U contains policies that lower DPO loss relative to the reference while still assigning lower probability to the preferred response.",
+  "quantifiers": "All beta > 0, reward_gap > 0, and delta_ref < -reward_gap/beta; U = {delta: delta_ref < delta < 0}.",
+  "source": "arXiv:2605.20834 source, main/implicit_assu.tex, def:undesirable and prop:undesirable_space",
+  "verification_rule": "VERIFIED if U has an exact witness, that witness violates absolute preference, and strict DPO monotonicity lowers its loss relative to delta_ref.",
+  "limitations": "The sigmoid gradient factor weakens toward zero but has positive limit sigmoid(beta*delta_ref) for fixed finite delta_ref; this does not verify literal vanishing at the boundary."
+}
