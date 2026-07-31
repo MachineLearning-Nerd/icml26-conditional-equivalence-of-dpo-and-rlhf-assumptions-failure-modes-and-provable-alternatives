@@ -13,15 +13,20 @@ over SimPO Arena-Hard, and +3.7 over DPO Arena-Hard) recompute exactly.
 ## Route 2 — artifacts
 
 The paper-linked `https://github.com/visitworld123/CPO` returned “repository
-not found” on 2026-07-31. No CPO checkpoint, immutable generations, exact
-training configuration, or pair-level benchmark judgments were located.
+not found” on 2026-07-31. A likely first-author CPO checkpoint was located at
+the immutable Hugging Face revision
+`2d496b7103b3f17b033cac322b81270f5ec6cdac`. Its four BF16 weight shards total
+16.06 GB, but the model card does not link the paper and contains no benchmark
+generations, pair-level judgments, dataset identity, or exact evaluator revisions.
 
 ## Route 3 — official benchmark pipelines
 
 The official AlpacaEval and Arena-Hard repositories can score supplied model
-outputs using API judges. They cannot recreate absent CPO outputs. Training the
-paper's Llama-3-8B setup would require GPU compute, which is explicitly outside
-this campaign's authorization.
+outputs using API judges. Searches at revisions `cd543a149df89434d8a54582c0151c0b945c3d20`
+and `196f6b826783b3da7310e361a805fa36f0be83f3` found no matching generations or
+scores. The checkpoint permits generation in principle, but full-suite GPU
+execution is outside this campaign's authorization and the paper does not name
+the exact judge revisions required for a claim-faithful rerun.
 
 ## Route 4 — falsification attempt
 
