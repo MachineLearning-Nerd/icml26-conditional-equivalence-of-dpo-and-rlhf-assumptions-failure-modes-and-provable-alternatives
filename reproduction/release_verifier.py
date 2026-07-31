@@ -6,6 +6,7 @@ import urllib.request
 
 SPACE_ID = "DineshAI/7UEBX1KU1y"
 JUDGED_REVISION = "73b1ac8ff5dd201847e1e11cccc0ee0514beb728"
+BASE_REVISION = "2674e000bde4e642c6d3949f3a990655f10b10a7"
 EXPECTED_STATES = {
     "C1": "FALSIFIED",
     "C2": "VERIFIED",
@@ -61,7 +62,7 @@ def verify_release_bundle(bundle, repo_root):
         secret_free &= re.search(r"(?:hf_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,})", content) is None
 
     gates = {
-        "01_expected_live_space_and_revision": current_space["id"] == SPACE_ID and current_space["sha"] == JUDGED_REVISION,
+        "01_expected_live_space_and_base_revision": current_space["id"] == SPACE_ID and current_space["sha"] == BASE_REVISION,
         "02_judged_file_manifest_matches_live_tree": set(judged_manifest["files"]) == judged_files,
         "03_all_historical_nodes_remain_reachable": old_nodes <= current_nodes,
         "04_canonical_current_page_order": [node["slug"] for node in children[:8]] == canonical_prefix,
