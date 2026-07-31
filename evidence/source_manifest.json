@@ -14,6 +14,21 @@
     {
       "scope": "Author-linked implementation; unavailable (HTTP repository not found) at retrieval time",
       "url": "https://github.com/visitworld123/CPO"
+    },
+    {
+      "scope": "Likely first-author CPO checkpoint metadata and immutable weights; no explicit paper link or benchmark generations in the model card",
+      "revision": "2d496b7103b3f17b033cac322b81270f5ec6cdac",
+      "url": "https://huggingface.co/visity/llama-3-instruct-8b-cpo-full-beta-2.5_alpha-0.25_e-version-false-lr-1e-6/tree/2d496b7103b3f17b033cac322b81270f5ec6cdac"
+    },
+    {
+      "scope": "Official AlpacaEval archive searched for the CPO model name and reported scores; no match",
+      "revision": "cd543a149df89434d8a54582c0151c0b945c3d20",
+      "url": "https://github.com/tatsu-lab/alpaca_eval/tree/cd543a149df89434d8a54582c0151c0b945c3d20"
+    },
+    {
+      "scope": "Official Arena-Hard archive searched for the CPO model name and reported score; no match",
+      "revision": "196f6b826783b3da7310e361a805fa36f0be83f3",
+      "url": "https://github.com/lm-sys/arena-hard-auto/tree/196f6b826783b3da7310e361a805fa36f0be83f3"
     }
   ]
 }

@@ -37,7 +37,7 @@ def claim_table(claims):
         "C3": "Exact U witness + 9 real-data trajectories",
         "C4": "Direct constrained-RLHF differentiation",
         "C5": "Uniform softplus-to-hinge error bound",
-        "C6": "Four-route audit; benchmark artifact absent",
+        "C6": "Four-route audit; checkpoint found, generations absent",
     }
     for claim in claims:
         rows.append(f"| [{claim['id']}](#/claim-{claim['id'][1:]}) | **{claim['status']}** | {evidence[claim['id']]} |")
@@ -100,8 +100,9 @@ has negative derivative there and is strictly smaller at finite delta 2.
 Claims 2–5 survive at their exact stated scopes. C2 and C3 additionally pass a
 predeclared CPU-scaled experiment on 512 real chosen/rejected pairs from the
 paper dataset. C4's exact derivation passes, while its scaled comparative model
-gate fails and remains visible. C6 is **BLOCKED** after four routes because no
-author checkpoint or generations permit independent benchmark evaluation.
+gate fails and remains visible. C6 is **BLOCKED** after four routes: a likely
+first-author checkpoint is now frozen, but no benchmark generations,
+judgments, or exact evaluator revisions permit independent evaluation.
 
 ## Scope and cost
 
@@ -288,9 +289,11 @@ reproduction remains blocked after the mandatory routes:
 4. **Falsification attempt:** INCONCLUSIVE — {routes[3]['result']}
 
 The CPO Arena-Hard 90% interval `[30.7,35.0]` overlaps SimPO's `[27.3,32.3]`.
-No AlpacaEval intervals or paired judgments are supplied. GPU training is not
-authorized, and the missing Llama-3-8B checkpoint/generations cannot be
-recreated through the CPU route.
+No AlpacaEval intervals or paired judgments are supplied. The immutable 16.06
+GB checkpoint makes model provenance materially stronger, but its model card
+does not link the paper and supplies no benchmark outputs. Full-suite GPU
+execution is outside campaign authorization, and the paper omits exact judge
+revisions needed for a claim-faithful rerun.
 
 - [Four-route raw audit]({RAW_BASE}/raw/benchmark_audit_C6.json)
 - [Contract]({RAW_BASE}/contracts/C6.json)
@@ -309,7 +312,7 @@ The strongest honest outcome is **4 VERIFIED · 1 FALSIFIED · 1 BLOCKED**.
 - C2 and C3 pass both exact checks and a real-preference learned-policy route.
 - C4's stationary adaptive-margin derivation passes, while its scaled comparative model gate fails and remains disclosed.
 - C5 has a uniform asymptotic error certificate.
-- C6's author-reported ranking is internally correct, but independent benchmark evidence is unavailable.
+- C6's author-reported ranking is internally correct and a likely author checkpoint is frozen, but independent benchmark evidence is unavailable.
 
 Every result comes from `{FIXED_COMMAND}` at commit `{commit}` with one CPU
 thread and no GPU. Download the [release manifest]({RAW_BASE}/release_manifest.json)
@@ -382,7 +385,7 @@ def build_evidence(bundle, outputs, repo_root):
         "manifest.json",
     ):
         copy_text(bundle, outputs / name, f"evidence/raw/{name}")
-    for name in ("source_manifest.json", "judged_snapshot_manifest.json", "judged_verdict.json", "empirical_protocol.json"):
+    for name in ("source_manifest.json", "c6_checkpoint_manifest.json", "judged_snapshot_manifest.json", "judged_verdict.json", "empirical_protocol.json"):
         copy_text(bundle, repo_root / "evidence" / name, f"evidence/{name}")
     copy_text(bundle, repo_root / "pyproject.toml", "evidence/environment/pyproject.toml")
     copy_text(bundle, repo_root / "uv.lock", "evidence/environment/uv.lock")

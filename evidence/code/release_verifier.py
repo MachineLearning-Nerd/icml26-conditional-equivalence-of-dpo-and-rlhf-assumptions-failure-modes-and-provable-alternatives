@@ -6,6 +6,7 @@ import urllib.request
 
 SPACE_ID = "DineshAI/7UEBX1KU1y"
 JUDGED_REVISION = "73b1ac8ff5dd201847e1e11cccc0ee0514beb728"
+BASE_REVISION = "2674e000bde4e642c6d3949f3a990655f10b10a7"
 EXPECTED_STATES = {
     "C1": "FALSIFIED",
     "C2": "VERIFIED",
@@ -61,7 +62,7 @@ def verify_release_bundle(bundle, repo_root):
         secret_free &= re.search(r"(?:hf_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,})", content) is None
 
     gates = {
-        "01_expected_live_space_and_revision": current_space["id"] == SPACE_ID and current_space["sha"] == JUDGED_REVISION,
+        "01_expected_live_space_and_base_revision": current_space["id"] == SPACE_ID and current_space["sha"] == BASE_REVISION,
         "02_judged_file_manifest_matches_live_tree": set(judged_manifest["files"]) == judged_files,
         "03_all_historical_nodes_remain_reachable": old_nodes <= current_nodes,
         "04_canonical_current_page_order": [node["slug"] for node in children[:8]] == canonical_prefix,
@@ -69,7 +70,7 @@ def verify_release_bundle(bundle, repo_root):
         "06_every_claim_has_contract_and_page": all((bundle / f"evidence/contracts/C{number}.json").is_file() and (bundle / f"pages/claim-{number}/page.md").is_file() for number in range(1, 7)),
         "07_source_urls_and_archive_hashes_visible": "arxiv.org/e-print/2605.20834" in (bundle / "evidence/source_manifest.json").read_text(),
         "08_fixed_command_and_locked_environment": (bundle / "evidence/verification_command.txt").read_text().strip() == "uv sync --frozen && uv run --frozen python -m reproduction.run" and (bundle / "evidence/environment/uv.lock").is_file(),
-        "09_raw_results_metadata_and_code_downloadable": all((bundle / f"evidence/raw/{name}").is_file() for name in ("claim1_counterexample.json", "formal_audit_C2_C5.json", "real_preference_pilot.json", "benchmark_audit_C6.json", "run_metadata.json")) and (bundle / "evidence/code/release_verifier.py").is_file(),
+        "09_raw_results_metadata_and_code_downloadable": all((bundle / f"evidence/raw/{name}").is_file() for name in ("claim1_counterexample.json", "formal_audit_C2_C5.json", "real_preference_pilot.json", "benchmark_audit_C6.json", "run_metadata.json")) and (bundle / "evidence/c6_checkpoint_manifest.json").is_file() and (bundle / "evidence/code/release_verifier.py").is_file(),
         "10_checker_controls_and_empirical_gate_visible": all(pilot["gates"][claim] for claim in ("C2", "C3")) and not pilot["gates"]["C4"] and "negative_controls" in (bundle / "evidence/raw/formal_audit_C2_C5.json").read_text(),
         "11_low_confidence_claim_has_four_routes_and_blocker": benchmark["status"] == "BLOCKED" and len(benchmark["routes"]) == 4 and "confidence: LOW" in page_text,
         "12_text_only_secret_free_hashed_bundle": text_only and secret_free and manifest_valid,

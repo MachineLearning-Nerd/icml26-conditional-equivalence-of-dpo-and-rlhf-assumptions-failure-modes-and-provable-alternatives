@@ -26,7 +26,7 @@
   },
   {
     "id": "C6",
-    "reason": "The paper's reported point ranking is transcribed correctly, but no public model/generations permit independent evaluation and the supplied uncertainty is not decisive.",
+    "reason": "The paper's reported point ranking is transcribed correctly and a likely author checkpoint exists, but no generations, judgments, or exact evaluator revisions permit independent evaluation; the supplied uncertainty is not decisive.",
     "status": "BLOCKED"
   }
 ]

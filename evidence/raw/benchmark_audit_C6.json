@@ -1,8 +1,66 @@
 {
   "author_report_point_estimates": "VERIFIED",
+  "checkpoint_manifest": {
+    "benchmark_artifacts": {
+      "exact_alpacaeval_evaluator_revision": null,
+      "exact_arena_hard_evaluator_revision": null,
+      "generation_files": [],
+      "model_card_results": [],
+      "pairwise_judgments": []
+    },
+    "generation_metadata": {
+      "do_sample": true,
+      "max_length": 4096,
+      "temperature": 0.6,
+      "top_p": 0.9
+    },
+    "model": {
+      "created_at": "2026-02-10T10:50:31+00:00",
+      "last_modified": "2026-02-10T11:56:06+00:00",
+      "repo_id": "visity/llama-3-instruct-8b-cpo-full-beta-2.5_alpha-0.25_e-version-false-lr-1e-6",
+      "revision": "2d496b7103b3f17b033cac322b81270f5ec6cdac",
+      "weight_bytes": 16060956376,
+      "weight_shards_sha256": [
+        "e36bac8e4d76a8c5ab6cc0420d4e8d1c4a464b27efb937fc1296c8046cbddd17",
+        "7a83af2092ce7e1a11eef587080aa205c5823856c07da00de9fd64b57f400de4",
+        "9dbe00a5a5101066226e5d23a6e9399dbb0730343ba3dff41e15ceb6c3902f08",
+        "fe78c517a9f6ab556cd9b670a8ab713ee1cb4faf61522fe1d18e371d0f3bc094"
+      ]
+    },
+    "official_archive_searches": [
+      {
+        "model_or_score_match": false,
+        "repo": "tatsu-lab/alpaca_eval",
+        "revision": "cd543a149df89434d8a54582c0151c0b945c3d20"
+      },
+      {
+        "model_or_score_match": false,
+        "repo": "lm-sys/arena-hard-auto",
+        "revision": "196f6b826783b3da7310e361a805fa36f0be83f3"
+      }
+    ],
+    "provenance": {
+      "assessment": "Likely first-author checkpoint; the model name and training metadata match CPO, but the card does not explicitly link the paper.",
+      "explicit_paper_link_in_model_card": false,
+      "hub_profile_display_name": "zhiqin yang",
+      "paper_first_author": "Zhiqin Yang"
+    },
+    "retrieved_utc_date": "2026-07-31",
+    "training_metadata": {
+      "alpha": 0.25,
+      "base_model": "Meta-Llama-3-8B-Instruct",
+      "beta": 2.5,
+      "e_version": false,
+      "epochs": 1,
+      "learning_rate": 1e-06,
+      "seed": 42,
+      "steps": 468,
+      "train_samples": 59876
+    }
+  },
   "claim_id": "C6",
   "independent_benchmark_reproduction": "BLOCKED",
-  "reason": "The paper's reported point ranking is transcribed correctly, but no public model/generations permit independent evaluation and the supplied uncertainty is not decisive.",
+  "reason": "The paper's reported point ranking is transcribed correctly and a likely author checkpoint exists, but no generations, judgments, or exact evaluator revisions permit independent evaluation; the supplied uncertainty is not decisive.",
   "routes": [
     {
       "name": "author_table_and_arithmetic",
@@ -12,13 +70,17 @@
     {
       "checks": {
         "author_repository_available": false,
-        "cpo_checkpoint_available": false,
+        "checkpoint_revision": "2d496b7103b3f17b033cac322b81270f5ec6cdac",
+        "checkpoint_weight_bytes": 16060956376,
         "exact_training_configuration_available": false,
-        "generation_outputs_available": false
+        "explicit_paper_link_in_model_card": false,
+        "generation_outputs_available": false,
+        "likely_first_author_cpo_checkpoint_available": true,
+        "pairwise_judgments_available": false
       },
       "name": "artifact_provenance",
       "passed": false,
-      "result": "The paper-linked GitHub repository returned repository not found; no immutable model or generations were located."
+      "result": "A likely first-author 16.06 GB CPO checkpoint is frozen at an immutable Hub revision, but its card does not link the paper and contains no benchmark generations, judgments, dataset identity, or exact evaluator revisions."
     },
     {
       "checks": {
@@ -26,12 +88,14 @@
         "alpaca_eval_requires_model_outputs": true,
         "arena_hard_requires_model_answers": true,
         "arena_hard_uses_api_judge": true,
+        "exact_evaluator_revisions_available": false,
         "gpu_training_authorized": false,
-        "required_cpo_model_or_outputs_available": false
+        "required_cpo_model_available": true,
+        "required_model_outputs_available": false
       },
       "name": "official_benchmark_execution",
       "passed": false,
-      "result": "The public benchmark code is executable, but the missing CPO checkpoint/generations cannot be regenerated under the no-GPU rule."
+      "result": "The public benchmark code can score supplied answers, but the checkpoint still requires full-suite generation and the paper does not identify exact judge revisions. No saved outputs exist; GPU execution is outside campaign authorization."
     },
     {
       "checks": {

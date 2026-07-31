@@ -9,13 +9,13 @@
   "cpu_count_visible": 8,
   "dataset_revision": "9d189bae5856a823f3708d2c2bc4dbb43c90eb11",
   "dataset_subset_sha256": "1be7454542bc51886dc0cf1c5bed5d1c6cf10f4812685f9f09fa66c93e66fab4",
-  "git_sha": "1dbd3ae77db22d7e833d33b0622c738cd7c95613",
+  "git_sha": "e8505d6cb1bfa5679eea18690d9a5e8496b46fd9",
   "judged_space_revision": "73b1ac8ff5dd201847e1e11cccc0ee0514beb728",
   "numpy": "2.3.2",
   "platform": "macOS-26.5.2-arm64-arm-64bit",
   "python": "3.12.11",
-  "runtime_seconds": 0.02078550000442192,
+  "runtime_seconds": 0.027573959028813988,
   "seed": 260520834,
   "threads_used": 1,
-  "total_runtime_seconds": 15.320160874980502
+  "total_runtime_seconds": 15.669838166970294
 }

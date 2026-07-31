@@ -184,6 +184,7 @@ def run_combined_candidate(config):
     pilot = run_preference_pilot(protocol_path)
     pilot_path = write_json("real_preference_pilot.json", pilot)
     benchmark_contract = ROOT / "evidence" / "claim_contracts" / "C6.json"
+    checkpoint_manifest = ROOT / "evidence" / "c6_checkpoint_manifest.json"
     benchmark = run_benchmark_audit(benchmark_contract)
     benchmark_path = write_json("benchmark_audit_C6.json", benchmark)
 
@@ -224,6 +225,7 @@ def run_combined_candidate(config):
         metadata_path,
         protocol_path,
         benchmark_contract,
+        checkpoint_manifest,
     )
     write_json("manifest.json", {str(path.relative_to(ROOT)): file_sha256(path) for path in artifacts})
     verified = sum(state == "VERIFIED" for state in final_states.values())

@@ -12,7 +12,7 @@ from the judged Space revision `73b1ac8ff5dd201847e1e11cccc0ee0514beb728`.
 | [C3](#/claim-3) | **VERIFIED** | Exact U witness + 9 real-data trajectories |
 | [C4](#/claim-4) | **VERIFIED** | Direct constrained-RLHF differentiation |
 | [C5](#/claim-5) | **VERIFIED** | Uniform softplus-to-hinge error bound |
-| [C6](#/claim-6) | **BLOCKED** | Four-route audit; benchmark artifact absent |
+| [C6](#/claim-6) | **BLOCKED** | Four-route audit; checkpoint found, generations absent |
 
 ## Main finding
 
@@ -24,15 +24,16 @@ has negative derivative there and is strictly smaller at finite delta 2.
 Claims 2–5 survive at their exact stated scopes. C2 and C3 additionally pass a
 predeclared CPU-scaled experiment on 512 real chosen/rejected pairs from the
 paper dataset. C4's exact derivation passes, while its scaled comparative model
-gate fails and remains visible. C6 is **BLOCKED** after four routes because no
-author checkpoint or generations permit independent benchmark evaluation.
+gate fails and remains visible. C6 is **BLOCKED** after four routes: a likely
+first-author checkpoint is now frozen, but no benchmark generations,
+judgments, or exact evaluator revisions permit independent evaluation.
 
 ## Scope and cost
 
 - Fixed command: `uv sync --frozen && uv run --frozen python -m reproduction.run`
-- Git commit: `1dbd3ae77db22d7e833d33b0622c738cd7c95613`
+- Git commit: `e8505d6cb1bfa5679eea18690d9a5e8496b46fd9`
 - Python 3.12.11; NumPy 2.3.2; one CPU thread
-- Seed: 260520834; runtime: 15.320 s
+- Seed: 260520834; runtime: 15.670 s
 - Dataset revision: `9d189bae5856a823f3708d2c2bc4dbb43c90eb11`
 - Dataset subset hash: `1be7454542bc51886dc0cf1c5bed5d1c6cf10f4812685f9f09fa66c93e66fab4`
 - GPU used: **none**
