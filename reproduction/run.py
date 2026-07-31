@@ -21,6 +21,8 @@ from reproduction.claim1_counterexample import run_claim1_counterexample
 from reproduction.benchmark_audit import run_benchmark_audit
 from reproduction.formal_audit import run_formal_audit
 from reproduction.preference_pilot import run_preference_pilot
+from reproduction.release_builder import build_release_bundle
+from reproduction.release_verifier import verify_release_bundle
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -233,6 +235,15 @@ def run_combined_candidate(config):
     print(f"EVAL empirical_claim_gates={sum(pilot['gates'].values())}")
 
 
+def run_release_bundle(config):
+    run_combined_candidate(config)
+    bundle = build_release_bundle(ROOT, OUTPUTS)
+    gates = verify_release_bundle(bundle, ROOT)
+    write_json("release_gates.json", gates)
+    print(f"Release gates: {sum(gates.values())}/{len(gates)} passed")
+    print(f"EVAL release_gates={sum(gates.values())}")
+
+
 def main():
     config = json.loads((ROOT / "reproduction" / "config.json").read_text())
     if config["threads"] != 1:
@@ -252,6 +263,9 @@ def main():
         return
     if config["mode"] == "combined_candidate":
         run_combined_candidate(config)
+        return
+    if config["mode"] == "release_bundle":
+        run_release_bundle(config)
         return
     raise SystemExit(f"Unsupported mode: {config['mode']}")
 
