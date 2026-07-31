@@ -1,0 +1,19 @@
+{
+  "retrieved_utc_date": "2026-07-31",
+  "sources": [
+    {
+      "scope": "Paper HTML, used first for exact claims and section context",
+      "sha256": "80809c80491058f7c041b4c7668560e6d06703c9218f8466368e5b05170d1c8e",
+      "url": "https://ar5iv.labs.arxiv.org/html/2605.20834"
+    },
+    {
+      "scope": "arXiv source fallback for implicit_assu.tex and exact theorem wording omitted by the HTML rendering",
+      "sha256": "cec74f481515079f9124c63b4c88d31528712518358d5c5735025ae044eea841",
+      "url": "https://arxiv.org/e-print/2605.20834"
+    },
+    {
+      "scope": "Author-linked implementation; unavailable (HTTP repository not found) at retrieval time",
+      "url": "https://github.com/visitworld123/CPO"
+    }
+  ]
+}
