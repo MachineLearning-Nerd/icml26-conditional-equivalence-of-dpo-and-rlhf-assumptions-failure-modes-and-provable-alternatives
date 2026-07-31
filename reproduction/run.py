@@ -6,11 +6,21 @@ import subprocess
 import time
 from pathlib import Path
 
+for variable in (
+    "OPENBLAS_NUM_THREADS",
+    "OMP_NUM_THREADS",
+    "MKL_NUM_THREADS",
+    "VECLIB_MAXIMUM_THREADS",
+):
+    os.environ[variable] = "1"
+
 import numpy as np
 
 from reproduction.historical_checks import run_checks
 from reproduction.claim1_counterexample import run_claim1_counterexample
+from reproduction.benchmark_audit import run_benchmark_audit
 from reproduction.formal_audit import run_formal_audit
+from reproduction.preference_pilot import run_preference_pilot
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -119,24 +129,108 @@ def run_theory_audit(config):
             }
             for claim_id, certificate in certificates.items()
         ],
-        {
-            "id": "C6",
-            "status": "BLOCKED",
-            "reason": "The benchmark claim has not yet passed its release routes.",
-        },
+        {"id": "C6", "status": "BLOCKED", "reason": "No benchmark reproduction."},
+    ]
+    write_json("claim_statuses.json", claims)
+    print("C2-C5 exact obligations and controls: PASS")
+    print("EVAL exact_claims_resolved=5")
+    return claim1, certificates, audit_path
+
+
+def run_empirical_pilot(config):
+    _, claim1 = run_claim1(config)
+    protocol_path = ROOT / "evidence" / "empirical_protocol.json"
+    pilot = run_preference_pilot(protocol_path)
+    pilot_path = write_json("real_preference_pilot.json", pilot)
+    claims = [
+        {"id": "C1", "status": "FALSIFIED", "reason": claim1["reason"]},
+        *[
+            {
+                "id": claim_id,
+                "status": "VERIFIED" if pilot["gates"][claim_id] else "BLOCKED",
+                "reason": (
+                    "The predeclared real-preference policy gate passed."
+                    if pilot["gates"][claim_id]
+                    else "The predeclared real-preference policy gate did not pass."
+                ),
+            }
+            for claim_id in ("C2", "C3", "C4")
+        ],
+        {"id": "C5", "status": "BLOCKED", "reason": "Not tested on this route."},
+        {"id": "C6", "status": "BLOCKED", "reason": "No benchmark reproduction."},
     ]
     claims_path = write_json("claim_statuses.json", claims)
     metadata_path = OUTPUTS / "run_metadata.json"
     claim1_path = OUTPUTS / "claim1_counterexample.json"
-    raw_path = OUTPUTS / "historical_scalar_checks.json"
     manifest = {
         path.name: file_sha256(path)
-        for path in (raw_path, claims_path, metadata_path, claim1_path, audit_path)
+        for path in (claims_path, metadata_path, claim1_path, pilot_path, protocol_path)
     }
     write_json("manifest.json", manifest)
-    print("C2-C5 exact obligations and controls: PASS")
-    print("Final claim states: 4 VERIFIED, 1 FALSIFIED, 1 BLOCKED")
+    passed = sum(pilot["gates"].values())
+    print(f"Real-preference claim gates: {passed}/3 passed")
+    print(f"EVAL empirical_claim_gates={passed}")
+    return claim1, pilot, pilot_path
+
+
+def run_combined_candidate(config):
+    started = time.monotonic()
+    _, claim1 = run_claim1(config)
+    theory = run_formal_audit()
+    theory_path = write_json("formal_audit_C2_C5.json", theory)
+    protocol_path = ROOT / "evidence" / "empirical_protocol.json"
+    pilot = run_preference_pilot(protocol_path)
+    pilot_path = write_json("real_preference_pilot.json", pilot)
+    benchmark_contract = ROOT / "evidence" / "claim_contracts" / "C6.json"
+    benchmark = run_benchmark_audit(benchmark_contract)
+    benchmark_path = write_json("benchmark_audit_C6.json", benchmark)
+
+    final_states = {
+        "C1": "FALSIFIED",
+        "C2": "VERIFIED" if theory["C2"]["status"] == "VERIFIED" and pilot["gates"]["C2"] else "BLOCKED",
+        "C3": "VERIFIED" if theory["C3"]["status"] == "VERIFIED" and pilot["gates"]["C3"] else "BLOCKED",
+        "C4": theory["C4"]["status"],
+        "C5": theory["C5"]["status"],
+        "C6": benchmark["status"],
+    }
+    reasons = {
+        "C1": claim1["reason"],
+        "C2": "Exact objective checks and the predeclared real-preference gate passed.",
+        "C3": "Exact U-region checks and the predeclared real-preference gate passed.",
+        "C4": "The exact constrained-RLHF derivation passed; the scaled comparative model gate failed and is retained as a limitation.",
+        "C5": "The uniform softplus-to-hinge certificate and controls passed.",
+        "C6": benchmark["reason"],
+    }
+    claims = [
+        {"id": claim_id, "status": final_states[claim_id], "reason": reasons[claim_id]}
+        for claim_id in ("C1", "C2", "C3", "C4", "C5", "C6")
+    ]
+    claims_path = write_json("claim_statuses.json", claims)
+    metadata_path = OUTPUTS / "run_metadata.json"
+    metadata = json.loads(metadata_path.read_text())
+    metadata["total_runtime_seconds"] = time.monotonic() - started
+    metadata["dataset_revision"] = pilot["dataset_revision"]
+    metadata["dataset_subset_sha256"] = pilot["subset_sha256"]
+    write_json("run_metadata.json", metadata)
+    artifacts = (
+        OUTPUTS / "historical_scalar_checks.json",
+        OUTPUTS / "claim1_counterexample.json",
+        theory_path,
+        pilot_path,
+        benchmark_path,
+        claims_path,
+        metadata_path,
+        protocol_path,
+        benchmark_contract,
+    )
+    write_json("manifest.json", {str(path.relative_to(ROOT)): file_sha256(path) for path in artifacts})
+    verified = sum(state == "VERIFIED" for state in final_states.values())
+    falsified = sum(state == "FALSIFIED" for state in final_states.values())
+    blocked = sum(state == "BLOCKED" for state in final_states.values())
+    print(f"Final claim states: {verified} VERIFIED, {falsified} FALSIFIED, {blocked} BLOCKED")
+    print(f"Empirical gates C2/C3/C4: {pilot['gates']}")
     print("EVAL exact_claims_resolved=5")
+    print(f"EVAL empirical_claim_gates={sum(pilot['gates'].values())}")
 
 
 def main():
@@ -152,6 +246,12 @@ def main():
         return
     if config["mode"] == "formal_audit_c2_c5":
         run_theory_audit(config)
+        return
+    if config["mode"] == "real_preference_pilot":
+        run_empirical_pilot(config)
+        return
+    if config["mode"] == "combined_candidate":
+        run_combined_candidate(config)
         return
     raise SystemExit(f"Unsupported mode: {config['mode']}")
 

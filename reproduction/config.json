@@ -1,5 +1,5 @@
 {
-  "mode": "formal_audit_c2_c5",
+  "mode": "combined_candidate",
   "seed": 260520834,
   "threads": 1
 }
