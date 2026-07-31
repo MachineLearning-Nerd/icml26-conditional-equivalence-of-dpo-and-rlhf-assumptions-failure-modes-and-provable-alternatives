@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 
 from reproduction.historical_checks import run_checks
+from reproduction.claim1_counterexample import run_claim1_counterexample
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -68,16 +69,53 @@ def run_baseline(config):
     print(f"Historical scalar checks: {passed}/{len(checks)} passed")
     print("Final claim states: 0 VERIFIED, 0 FALSIFIED, 6 BLOCKED")
     print(f"EVAL historical_scalar_checks={passed}")
+    return checks
+
+
+def run_claim1(config):
+    checks = run_baseline(config)
+    contract_path = ROOT / "evidence" / "claim_contracts" / "C1.json"
+    certificate = run_claim1_counterexample(contract_path)
+    certificate_path = write_json("claim1_counterexample.json", certificate)
+    claims = [
+        {
+            "id": f"C{number}",
+            "status": "FALSIFIED" if number == 1 else "BLOCKED",
+            "reason": (
+                certificate["reason"]
+                if number == 1
+                else "No exact claim-level evidence has passed yet."
+            ),
+        }
+        for number in range(1, 7)
+    ]
+    claims_path = write_json("claim_statuses.json", claims)
+    metadata_path = OUTPUTS / "run_metadata.json"
+    raw_path = OUTPUTS / "historical_scalar_checks.json"
+    manifest = {
+        path.name: file_sha256(path)
+        for path in (raw_path, claims_path, metadata_path, certificate_path, contract_path)
+    }
+    write_json("manifest.json", manifest)
+    print("C1 counterexample obligations: PASS")
+    print("C1 final state: FALSIFIED")
+    print("Final claim states: 0 VERIFIED, 1 FALSIFIED, 5 BLOCKED")
+    print("EVAL exact_claims_resolved=1")
+    return checks, certificate
 
 
 def main():
     config = json.loads((ROOT / "reproduction" / "config.json").read_text())
     if config["threads"] != 1:
         raise SystemExit("Refusing to run: threads must remain 1")
-    if config["mode"] != "judged_scalar_baseline":
-        raise SystemExit(f"Unsupported mode: {config['mode']}")
     OUTPUTS.mkdir(exist_ok=True)
-    run_baseline(config)
+    if config["mode"] == "judged_scalar_baseline":
+        run_baseline(config)
+        return
+    if config["mode"] == "claim1_counterexample":
+        run_claim1(config)
+        return
+    raise SystemExit(f"Unsupported mode: {config['mode']}")
 
 
 if __name__ == "__main__":

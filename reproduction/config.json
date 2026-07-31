@@ -1,5 +1,5 @@
 {
-  "mode": "judged_scalar_baseline",
+  "mode": "claim1_counterexample",
   "seed": 260520834,
   "threads": 1
 }
