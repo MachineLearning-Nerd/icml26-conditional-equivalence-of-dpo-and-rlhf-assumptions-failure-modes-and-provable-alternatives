@@ -19,4 +19,4 @@ This repository keeps the complete evidence-development history. The old `orx/` 
 - No evidence-development branch was discarded during cleanup.
 - The old names are retained in this table only as migration history; the live GitHub branches use the clean names above.
 - `main` is the default branch and contains the human-readable README, this audit, the current claim pages, and the final release bundle.
-- Commit attribution for the rewritten reachable history is normalized to `MachineLearning-Nerd <37579156+MachineLearning-Nerd@users.noreply.github.com>`; the evidence content itself is unchanged except for documentation and repository-link cleanup.
+- Commit attribution for the rewritten reachable history is normalized to `MachineLearning-Nerd <MachineLearning-Nerd@users.noreply.github.com>`; the evidence content itself is unchanged except for documentation and repository-link cleanup.

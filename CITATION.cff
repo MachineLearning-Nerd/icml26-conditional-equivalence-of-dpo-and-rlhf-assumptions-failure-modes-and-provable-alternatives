@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+title: "Conditional Equivalence of DPO and RLHF — ICML 2026 reproduction audit"
+message: "Please cite the paper and this repository when using the audit code or evidence."
+type: software
+authors:
+  - name: MachineLearning-Nerd
+    affiliation: Independent reproduction collection
+repository-code: "https://github.com/MachineLearning-Nerd/icml26-conditional-equivalence-of-dpo-and-rlhf-assumptions-failure-modes-and-provable-alternatives"
+url: "https://github.com/MachineLearning-Nerd/icml26-conditional-equivalence-of-dpo-and-rlhf-assumptions-failure-modes-and-provable-alternatives"
+date-released: 2026-08-19
+preferred-citation:
+  type: article
+  title: "Conditional Equivalence of DPO and RLHF: Implicit Assumption, Failure Modes, and Provable Alignment"
+  authors:
+    - given-names: Zhiqin
+      family-names: Yang
+    - given-names: Yonggang
+      family-names: Zhang
+    - given-names: Wei
+      family-names: Xue
+    - given-names: Dong
+      family-names: Fang
+    - given-names: Bo
+      family-names: Han
+    - given-names: Yike
+      family-names: Guo
+  year: 2026
+  journal: "arXiv"
+  url: "https://arxiv.org/abs/2605.20834"
+  identifiers:
+    - type: doi
+      value: "10.48550/arXiv.2605.20834"

@@ -39,6 +39,8 @@ The release does not treat every passing script as confirmation of the paper. Ea
 
 The current release contains **4 VERIFIED, 1 FALSIFIED, and 1 BLOCKED** claims. “FALSIFIED” means the universal theorem fails under its printed ordered-pair objective; it does not claim that every DPO/RLHF relationship or every alternative population objective fails. “BLOCKED” means the available artifacts cannot support a claim-faithful test; it is not an estimate of the benchmark result.
 
+The collection status is `PARTIAL_CLAIMS_C1_FALSIFIED_C2_TO_C5_VERIFIED_SCOPED_C6_BENCHMARK_BLOCKED`. `publication_allowed=false`, `score_claim=false`, and `official_author_endorsement=false`; the historical 5/12 judged Space record is archived and no current score is claimed.
+
 The historical judged Space baseline is preserved, but is not the current verdict. Its immutable record is `DineshAI/7UEBX1KU1y` at revision `73b1ac8ff5dd201847e1e11cccc0ee0514beb728`; it received **5/12**, quality **low**, with five `toy` verdicts and one `inconclusive` verdict. The later release adds exact contracts, fail-closed checks, the real-preference pilot, and an explicit C6 blocker without deleting the historical pages.
 
 ## Repository map
@@ -49,6 +51,15 @@ The historical judged Space baseline is preserved, but is not the current verdic
 - `evidence/raw/` — machine-readable outputs used by the claim pages.
 - `evidence/source_manifest.json` — source URLs, retrieval date, and hashes for the paper, benchmark repositories, and checkpoint metadata.
 - `evidence/release_manifest.json` — SHA-256 hashes for the released evidence bundle.
+- `CLAIM_EVIDENCE.md` — standalone claim-to-evidence paths, producers, controls, and boundaries.
+- `SOURCE_AUDIT.md` — paper, source hashes, unavailable implementation, and benchmark provenance audit.
+- `ENVIRONMENT.md` — pinned command, runtime, seed, and compute limits.
+- `REPORT.md` — decision record and publication boundary.
+- `STATUS.md` — current machine-readable and human-readable status.
+- `CITATION.cff` — citation metadata for the paper and this audit.
+- `AUTHOR_THANK_YOU.md` — thank-you note to the paper authors.
+- `claims.json` and `reproduction_verdicts.json` — machine-readable claim status.
+- `AUTONOMOUS_STATE.json` and `verify_final.py` — fail-closed public-state verifier.
 - `branch-audit.md` — the purpose and evidence role of every retained branch after the cleanup.
 
 ## Reproduce the release
@@ -86,4 +97,4 @@ Thank you to Zhiqin Yang, Yonggang Zhang, Wei Xue, Dong Fang, Bo Han, and Yike G
 
 ## Attribution
 
-The cleanup documentation and approved repository-history normalization are maintained under the **MachineLearning-Nerd** GitHub identity. Historical evidence files retain their original timestamps, hashes, and external identifiers where changing them would invalidate the recorded artifact.
+The cleanup documentation and repository-history normalization are maintained under the **MachineLearning-Nerd** GitHub identity, using the exact commit identity `MachineLearning-Nerd <MachineLearning-Nerd@users.noreply.github.com>`. Historical evidence files retain their original timestamps, hashes, and external identifiers where changing them would invalidate the recorded artifact.

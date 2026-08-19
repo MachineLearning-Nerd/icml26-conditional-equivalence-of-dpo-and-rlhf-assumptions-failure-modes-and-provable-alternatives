@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "repository": "MachineLearning-Nerd/icml26-conditional-equivalence-of-dpo-and-rlhf-assumptions-failure-modes-and-provable-alternatives",
+  "phase": "published_scoped_partial_audit_with_c1_counterexample_and_c6_benchmark_blocker",
+  "next_action": "Run verify_final.py from this repository or a fresh clone to verify the live nine-branch GitHub state.",
+  "github": {
+    "url": "https://github.com/MachineLearning-Nerd/icml26-conditional-equivalence-of-dpo-and-rlhf-assumptions-failure-modes-and-provable-alternatives",
+    "default_branch": "main",
+    "former_name": "icml26-repro-7UEBX1KU1y-conditional-equivalence-of-dpo-and-rlhf-assumptions-failure-modes-and-provab"
+  },
+  "branch_layout": {
+    "expected_count": 9,
+    "branches": [
+      "main",
+      "audit/c6-author-checkpoint-provenance",
+      "audit/claim-1-proof-obligations",
+      "audit/exact-algebra-c2-c5",
+      "audit/judged-scalar-baseline",
+      "audit/release-bundle-gate",
+      "experiment/cpo-margin-strength-0-2",
+      "experiment/real-preference-policy-pilot",
+      "release/combined-candidate"
+    ],
+    "forbidden_prefixes": ["orx/"],
+    "forbidden_names": ["master"]
+  },
+  "audit": {
+    "overall_verdict": "PARTIAL_CLAIMS_C1_FALSIFIED_C2_TO_C5_VERIFIED_SCOPED_C6_BENCHMARK_BLOCKED",
+    "publication_boundary": "C1_PRINTED_ORDERED_PAIR_COUNTEREXAMPLE_C4_SCALED_LEARNED_POLICY_GATE_FAILED_C6_MISSING_GENERATIONS_JUDGMENTS_EVALUATOR_REVISIONS",
+    "publication_allowed": false,
+    "score_claim": false,
+    "official_author_endorsement": false,
+    "current_official_score": null
+  },
+  "historical_judge": {
+    "status": "archived_not_current",
+    "space_id": "DineshAI/7UEBX1KU1y",
+    "space_revision": "73b1ac8ff5dd201847e1e11cccc0ee0514beb728",
+    "points": 5,
+    "total": 12,
+    "current_score_not_claimed": true
+  },
+  "attribution": {
+    "name": "MachineLearning-Nerd",
+    "email": "MachineLearning-Nerd@users.noreply.github.com",
+    "canonical_identity": "MachineLearning-Nerd <MachineLearning-Nerd@users.noreply.github.com>"
+  },
+  "history": {
+    "recovery_bundle_sha256": "878654bf2c74737ead37d28bb7eb50f49b9b4dd8abecbd869403842818dd0617",
+    "published_main_parent": "91b8043a30912cfdc22fcc78c37d74e387920176",
+    "expected_reachable_commits": 15,
+    "old_identity_present": false,
+    "rewrite_backup_refs_removed": true
+  },
+  "documentation": {
+    "readme": true,
+    "claim_evidence": true,
+    "source_audit": true,
+    "environment": true,
+    "report": true,
+    "citation": true,
+    "author_thank_you": true,
+    "status": true,
+    "machine_readable_verdicts": true,
+    "final_verifier": true
+  },
+  "live_verification": {
+    "remote_push_required_before_pass": true,
+    "fresh_clone_required_before_pass": true,
+    "command": "python3 verify_final.py"
+  }
+}

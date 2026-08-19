@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "repository": "MachineLearning-Nerd/icml26-conditional-equivalence-of-dpo-and-rlhf-assumptions-failure-modes-and-provable-alternatives",
+  "overall_verdict": "PARTIAL_CLAIMS_C1_FALSIFIED_C2_TO_C5_VERIFIED_SCOPED_C6_BENCHMARK_BLOCKED",
+  "publication_boundary": "C1_PRINTED_ORDERED_PAIR_COUNTEREXAMPLE_C4_SCALED_LEARNED_POLICY_GATE_FAILED_C6_MISSING_GENERATIONS_JUDGMENTS_EVALUATOR_REVISIONS",
+  "publication_allowed": false,
+  "score_claim": false,
+  "official_author_endorsement": false,
+  "claims": [
+    {"id": "C1", "status": "falsified_printed_ordered_pair_equivalence", "source_status": "FALSIFIED"},
+    {"id": "C2", "status": "verified_scoped_exact_objective_and_pilot", "source_status": "VERIFIED"},
+    {"id": "C3", "status": "verified_scoped_undesirable_region", "source_status": "VERIFIED"},
+    {"id": "C4", "status": "verified_scoped_derivation_comparative_gate_failed", "source_status": "VERIFIED"},
+    {"id": "C5", "status": "verified_scoped_uniform_certificate", "source_status": "VERIFIED"},
+    {"id": "C6", "status": "blocked_missing_benchmark_provenance", "source_status": "BLOCKED"}
+  ]
+}

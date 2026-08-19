@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "repository": "MachineLearning-Nerd/icml26-conditional-equivalence-of-dpo-and-rlhf-assumptions-failure-modes-and-provable-alternatives",
+  "overall_verdict": "PARTIAL_CLAIMS_C1_FALSIFIED_C2_TO_C5_VERIFIED_SCOPED_C6_BENCHMARK_BLOCKED",
+  "publication_boundary": "C1_PRINTED_ORDERED_PAIR_COUNTEREXAMPLE_C4_SCALED_LEARNED_POLICY_GATE_FAILED_C6_MISSING_GENERATIONS_JUDGMENTS_EVALUATOR_REVISIONS",
+  "publication_allowed": false,
+  "score_claim": false,
+  "official_author_endorsement": false,
+  "current_official_score": null,
+  "historical_judge": {
+    "status": "archived_not_current",
+    "space_id": "DineshAI/7UEBX1KU1y",
+    "space_revision": "73b1ac8ff5dd201847e1e11cccc0ee0514beb728",
+    "points": 5,
+    "total": 12,
+    "quality": "low",
+    "current_score_not_claimed": true
+  },
+  "claims": {
+    "C1": {"status": "falsified_printed_ordered_pair_equivalence", "source_status": "FALSIFIED"},
+    "C2": {"status": "verified_scoped_exact_objective_and_pilot", "source_status": "VERIFIED"},
+    "C3": {"status": "verified_scoped_undesirable_region", "source_status": "VERIFIED"},
+    "C4": {"status": "verified_scoped_derivation_comparative_gate_failed", "source_status": "VERIFIED"},
+    "C5": {"status": "verified_scoped_uniform_certificate", "source_status": "VERIFIED"},
+    "C6": {"status": "blocked_missing_benchmark_provenance", "source_status": "BLOCKED"}
+  },
+  "upstream": {
+    "source_manifest": "evidence/source_manifest.json",
+    "verification_command": "uv sync --frozen && uv run --frozen python -m reproduction.run",
+    "recorded_run_status": "PARTIAL_CLAIMS_WITH_C6_BLOCKER"
+  }
+}
